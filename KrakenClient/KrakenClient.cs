@@ -9,7 +9,7 @@ using System.Net;
 using System.Configuration;
 using System.IO;
 using System.Security.Cryptography;
-using PennedObjects.RateLimiting;
+//using PennedObjects.RateLimiting;
 
 namespace KrakenClient
 {
@@ -22,7 +22,7 @@ namespace KrakenClient
         string _key;
         string _secret;
         //RateGate is was taken from http://www.jackleitch.net/2010/10/better-rate-limiting-with-dot-net/
-        RateGate _rateGate;
+        //RateGate _rateGate;
 
         public KrakenClient()
         {
@@ -30,7 +30,7 @@ namespace KrakenClient
             _version = int.Parse(ConfigurationManager.AppSettings["KrakenApiVersion"]);
             _key = ConfigurationManager.AppSettings["KrakenKey"];
             _secret = ConfigurationManager.AppSettings["KrakenSecret"];
-            _rateGate = new RateGate(1, TimeSpan.FromSeconds(5));
+            //_rateGate = new RateGate(1, TimeSpan.FromSeconds(5));
             
         }
         
@@ -42,13 +42,13 @@ namespace KrakenClient
 
         protected virtual void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                if (_rateGate != null)
-                    _rateGate.Dispose();
-            }
+            //if (disposing)
+            //{
+            //    if (_rateGate != null)
+            //        _rateGate.Dispose();
+            //}
             
-            _rateGate = null;
+            //_rateGate = null;
         }
 
         ~KrakenClient()
@@ -77,7 +77,7 @@ namespace KrakenClient
             try
             {
                 //Wait for RateGate
-                _rateGate.WaitToProceed();
+                //_rateGate.WaitToProceed();
 
                 using (WebResponse webResponse = webRequest.GetResponse())
                 {
@@ -152,7 +152,7 @@ namespace KrakenClient
             try
             {
                 //Wait for RateGate
-                _rateGate.WaitToProceed();
+                //_rateGate.WaitToProceed();
 
                 using (WebResponse webResponse = webRequest.GetResponse())
                 {
